@@ -165,3 +165,14 @@ class adjbuilder {
 const partialClass = new adjbuilder('Young')
 const fullClass = partialClass.adjGenerator('Beautiful', 'woman')
 console.log(fullClass)
+
+
+// Challenge 2 - Function Currying 
+// Currying is the process of transforming a function that takes all arguments at once to a series of functions that take one variable each at a time
+
+normalSumFunction = (x,y) =>   x * y 
+
+currySumFunction = (x) => (y) =>  x * y 
+
+const ans12 = currySumFunction(4)(3)
+console.log(ans12)
