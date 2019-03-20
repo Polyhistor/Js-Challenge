@@ -176,3 +176,49 @@ currySumFunction = (x) => (y) =>  x * y
 
 const ans12 = currySumFunction(4)(3)
 console.log(ans12)
+
+
+// Final Section 
+
+// Challenge 1 - Local Storage 
+
+
+localStorage.setItem('name','pouya')
+
+var cat = localStorage.getItem('family')
+
+console.log(cat)
+
+localStorage.removeItem('name')
+
+console.log(cat)
+
+// Challenge - Promises
+
+
+const getMembers = count => new Promise((resolves, rejects) => {
+    // get the URL API
+    const api = 'https://api.randomuser.me/?nat=US&results=${count}'
+    // create HTTPrequest object
+    const request = new XMLHttpRequest
+    // 0 Unset
+    request.open('GET',api)
+    // 1 Opened because open() has been called 
+    request.onload = () => 
+        // Loading 
+        (request.status === 200) ? // if everything is okay! 
+        resolves(JSON.parse(request.response).results) : // parse the request into javascript object and access the results value in that object 
+        // if not! 
+        rejects(Error(request.statusText)) // read the status code, so we shall know the issue 
+    request.onerror = (err) => rejects(err)
+    // sending out the actual request
+    request.send()
+
+})
+
+
+getMembers(5).then(
+    members => console.log(members),
+    error => console.log( new Error ('Cannot load from the API'))
+)
+
