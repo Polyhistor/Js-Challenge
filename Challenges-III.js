@@ -378,3 +378,127 @@ getFibonacci = (num) => {
 }
 
 console.log(getFibonacci(10)) // executed 20 times only
+
+
+// immutability
+
+let colorObject = {
+  code: '###213',
+  name: 'aqua',
+  alpha: 0.9
+}
+
+alphaChanger= (object, prop) => {
+  object.alpha = prop
+  return object
+}
+
+console.log(alphaChanger(colorObject, 0.6).alpha)
+
+// Object.assign() 
+
+let AlphaChangerII = (obj, prop) => {
+    let newObject = Object.assign({}, obj, {alpha:prop})
+    return newObject
+} 
+
+console.log('look out here')
+console.log(AlphaChangerII(colorObject, 0.4).alpha)
+console.log(AlphaChangerII())
+
+// ES7 way
+
+const rateColor = (obj, prop) => ({
+    ...obj,
+    prop
+})
+
+
+console.log(AlphaChangerII(colorObject, 0.4).alpha)
+console.log(AlphaChangerII())
+
+// Adding to list exercises 
+
+let memo_color_list = {
+  title: 'red',
+  mercury: 'purple',
+  choso: 'green'
+}
+
+
+console.log(memo_color_list)
+Object.assign(memo_color_list, {kos:'yellow'})
+console.log(memo_color_list)
+
+
+const target = {}
+
+const source = {
+  a: 2, 
+  b: 3,
+  c: 4
+}
+
+
+Object.assign(target, source)
+
+console.log(target)
+
+// Another example of what we've seen above - but we copying the object this time 
+
+// let rateColor = functon(color, rating) {
+
+// }
+
+
+
+
+//object.getOwnPropertyDescriptor()
+
+const object1 = {
+  property1: 42
+}
+
+const descriptor1 = Object.getOwnPropertyDescriptor(object1, 'property1')
+
+console.log('descriptor config:'+ descriptor1.configurable)
+console.log('descriptor value:'+descriptor1.value)
+
+var descriptor = Object.getOwnPropertyDescriptor({ bar: 1 }, 'bar');
+
+console.log(descriptor.enumerable); // true
+console.log(descriptor.value);      // 1
+
+console.log(descriptor);
+
+//enumerables
+
+// So every object has a property called enumerable which if set to false, will not be visible during for..in loops, 
+// let 's get deeper. for example we've defined and object below: 
+
+var car = {
+  make : 'Honda',
+  mileage: '80,000',
+  color: 'red', 
+  owner: 'peter'
+}
+
+// If you look at the for...in loop below, you can see that the keys are enumerable, so they can accessed while we are in for...in 
+for (var i in car) {
+    console.log(i)
+}
+
+// Now if we want to set some stuff to not being enumerable, we use Object.defineProperty
+Object.defineProperty(car, 'mySecretProperty', {
+   value: 'cat pee',
+   enumerable: false
+})
+
+console.log(car)
+
+// now this property won't be accessible through the loop
+for (var i in car) {
+  console.log(i)
+}
+
+
